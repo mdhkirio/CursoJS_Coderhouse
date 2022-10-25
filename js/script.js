@@ -1,5 +1,6 @@
 let opcion;
 let cineElegido;
+let peliculaElegida;
 
 function buscarCine() 
 {
@@ -112,7 +113,14 @@ do
             cineElegido = buscarCine();
             if (cineElegido != "")
             {
-                buscarPelicula(cineElegido);
+                peliculaElegida = buscarPelicula(cineElegido);
+                if (peliculaElegida != "")
+                {
+                    alert("Felicidades, ya tienes tus boletos para ir a ver " + peliculaElegida + " en " + cineElegido + "\nTe esperamos")
+                } else
+                {
+                     opcion = 3
+                }
             } else
             {
                 opcion = 3
