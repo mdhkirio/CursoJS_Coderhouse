@@ -1,140 +1,47 @@
-let opcion;
-let cineElegido;
-let peliculaElegida;
-
-function buscarCine() 
+class Vehiculo
 {
-    let preguntarCine;
-    let cine;
-
-    preguntarCine = parseInt(prompt("Cines disponibles \n1.- Cinepolis \n2.- Cinemex \n3.- Cine las Américas \n4.- Cine Alameda"));
-    
-    switch (preguntarCine)
+    constructor(marca, modelo, color, placa, precio,id)
     {
-        case 1:
-            cine = "Cinepolis";
-            break;
-        case 2:
-            cine = "Cinemex";
-            break;
-        case 3:
-            cine = "Cine las Américas";
-            break;
-        case 4:
-            cine = "Cine Alameda";
-            break;            
-        default:
-            cine = ""
-            break;
+        this.marca = marca;
+        this.modelo = modelo;
+        this.color = color;
+        this.placa = placa;
+        this.precio = parseFloat(precio);
+        this.id = id;
     }
-    return cine;
+
+    asignarId(array)
+    {
+        this.id = array.length;
+    }
 }
 
-function buscarPelicula(cine)
-{
-    let opcionPelicula;
-    let pelicula;
+const Vehiculos = []
 
-    switch (cine)
+let seguir = true;
+
+while (seguir)
+{
+    let obtenerVehiculo = prompt("Teclea los datos del vehículo: marca, modelo, color, placa, precio, separados por una barra diagonal (/). Teclear Salir para finalizar");
+    if (obtenerVehiculo.toUpperCase() == 'SALIR')
     {
-        case "Cinepolis":
-            opcionPelicula = parseInt(prompt("Películas disponibles \n1.- Harry Potter \n2.- Animales Fantásticos"));
-            switch (opcionPelicula)
-            {
-                case 1:
-                    pelicula = "Harry Potter"
-                    break;
-                case 2:
-                    pelicula = "Animales Fantásticos"
-                    break;
-                default:
-                    pelicula = ""
-                    break;
-            }
-            break;
-        case "Cinemex":
-            opcionPelicula = parseInt(prompt("Películas disponibles \n1.- 007 \n2.- Superman"));
-            switch (opcionPelicula)
-            {
-                case 1:
-                    pelicula = "007"
-                    break;
-                case 2:
-                    pelicula = "Superman"
-                    break;
-                default:
-                    pelicula = ""
-                    break;
-            }
-            break;
-        case "Cine las Américas":
-            opcionPelicula = parseInt(prompt("Películas disponibles \n1.- El Rey León \n2.- El Rey Escorpión"));
-            switch (opcionPelicula)
-            {
-                case 1:
-                    pelicula = "El Rey León"
-                    break;
-                case 2:
-                    pelicula = "El Rey Escorpión"
-                    break;
-                default:
-                    pelicula = ""
-                    break;
-            }
-            break;
-        case "Cine Alameda":
-            opcionPelicula = parseInt(prompt("Películas disponibles \n1.- Avengers \n2.- Los 4 Fantásticos"));
-            switch (opcionPelicula)
-            {
-                case 1:
-                    pelicula = "Avengers"
-                    break;
-                case 2:
-                    pelicula = "Los 4 Fantásticos"
-                    break;
-                default:
-                    pelicula = ""
-                    break;
-            }
-            break;        
+        continuar = false;
+        break;
     }
-    return pelicula;
+    const datos = obtenerVehiculo.split('/');
+    console.log(datos);
+    const auto = new Vehiculo(datos[0], datos[1], datos[2], datos[3], datos[4]);
+    Vehiculos.push(auto);
+    auto.asignarId(Vehiculos);
+    console.log(Vehiculos);
 }
 
-do
+function ordenar() 
 {
-    alert("Busca tu próxima aventura \nPaso 1 - Elige tu cine \nPaso 2 - Elige tu película \nPaso 3 - Compra tus boletos");
+    let listaOrdenada = Vehiculos.slice(0);
 
-    opcion = parseInt(prompt("1.- Deseas continuar \n2.- Salir"));
+    return listaOrdenada.sort((a, b) => a.precio - b.precio);
 
-    switch (opcion)
-    {
-        case 1:
-            cineElegido = buscarCine();
-            if (cineElegido != "")
-            {
-                peliculaElegida = buscarPelicula(cineElegido);
-                if (peliculaElegida != "")
-                {
-                    alert("Felicidades, ya tienes tus boletos para ir a ver " + peliculaElegida + " en " + cineElegido + "\nTe esperamos")
-                } else
-                {
-                     opcion = 3
-                }
-            } else
-            {
-                opcion = 3
-            }
-            break;
-        default:
-            break;
-    }
+}
 
-    if (opcion < 1 || opcion > 2)
-    {
-        alert("opción inválida");
-    }
-} 
-while (opcion < 1 || opcion > 2);
-
-alert("Gracias por visitarnos, te esperamos pronto");
+console.log(ordenar());
